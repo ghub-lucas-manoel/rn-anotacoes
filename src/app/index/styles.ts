@@ -17,10 +17,7 @@ export const styles = StyleSheet.create({
         height: 50,
         width: 50
     },
-    plusIcon: {
-
-    },
-    body: {
+    main: {
         padding: 10
     },
     card: {
@@ -36,13 +33,13 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     cardTitle: {
-        fontSize: 23,
-        fontWeight: '500'
+        fontSize: 20,
+        fontWeight: '400'
     },
     cardMenuIcon: {
         
     },
     cardDescription: {
-        fontSize: 18
+        fontSize: 17
     }
 });
