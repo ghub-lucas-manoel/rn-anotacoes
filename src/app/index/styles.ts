@@ -18,28 +18,51 @@ export const styles = StyleSheet.create({
         width: 50
     },
     main: {
-        padding: 10
+        padding: 10,
+        gap: 10
     },
-    card: {
-        alignItems: "flex-start",
-        gap: 10,
-        backgroundColor: colors.orange[300],
+    modal: {
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    modalContainer: {
+        backgroundColor: colors.orange[200],
+        padding: 10,
+        borderTopStartRadius: 10,
+        borderTopEndRadius: 10
+    },
+    modalHeader: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        width: '100%',
+    },
+    modalHeaderTitle: {
+        fontSize: 23,
+        fontWeight: '400',
+        paddingBottom: 10
+    },
+    modalSection: {
+    },
+    modalSectionDescription: {
+        fontSize: 20
+    },
+    modalSectionButton: {
+        flexDirection: 'row',
+        gap: 5,
+        alignItems: 'center',
+        backgroundColor: colors.orange[400],
+        padding: 10,
+        paddingHorizontal: 20,
         borderRadius: 10,
-        padding: 10
     },
-    cardTitleBar: {
+    modalSectionButtonText: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    modalSectionFooter: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    cardTitle: {
-        fontSize: 20,
-        fontWeight: '400'
-    },
-    cardMenuIcon: {
-        
-    },
-    cardDescription: {
-        fontSize: 17
+        justifyContent: 'space-around',
+        paddingTop: 10
     }
 });

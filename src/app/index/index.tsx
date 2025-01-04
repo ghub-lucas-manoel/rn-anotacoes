@@ -1,9 +1,12 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import Card from '@/components/card';
+import { useState } from 'react';
 
 export default function Index() {
+    const [showModal, setShowModal] = useState(false);
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -13,20 +16,36 @@ export default function Index() {
                 </TouchableOpacity> 
             </View>
             <View style={styles.main}>
-                <View style={styles.card}>
-                    <View style={styles.cardTitleBar}> 
-                        <Text style={styles.cardTitle}>
-                            Título da anotação
-                        </Text>
-                        <TouchableOpacity>
-                            <MaterialIcons name='more-vert' size={23} />
-                        </TouchableOpacity> 
-                    </View>
-                    <Text style={styles.cardDescription}>
-                        Descrição da anotação
-                    </Text>
-                </View>
+                <Card onPress={() => setShowModal(true)}/>
             </View>
+            <Modal transparent visible={showModal} animationType='slide'>
+                <View style={styles.modal}>
+                    <View style={styles.modalContainer}>
+                        <View style={styles.modalHeader}>
+                            <Text style={styles.modalHeaderTitle}>
+                                Título da Anotação
+                            </Text>
+                            <TouchableOpacity onPress={() => setShowModal(false)}>
+                                <MaterialIcons name='exit-to-app' size={25}/>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.modalSection}>
+                            <Text style={styles.modalSectionDescription}>
+                                Descrição da Anotação
+                            </Text>
+                            <View style={styles.modalSectionFooter}>
+                            <TouchableOpacity style={styles.modalSectionButton}>
+                                <Text style={styles.modalSectionButtonText}>
+                                    Excluir
+                                </Text>
+                                <MaterialIcons name='delete' size={25}/>
+                            </TouchableOpacity>
+
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     )
 }
