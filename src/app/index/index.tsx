@@ -1,4 +1,4 @@
-import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -7,6 +7,24 @@ import { useState } from 'react';
 
 export default function Index() {
     const [showModal, setShowModal] = useState(false);
+
+    function confirmDelete() {
+        Alert.alert("Excluir Anotação",
+            "Você realmente deseja excluir esta anotação?",
+            [
+                {
+                    style: 'cancel',
+                    text: 'Não'
+                },
+                {
+                    text: 'Sim',
+                    onPress: () => {
+                        return;
+                    }
+                }
+            ]
+        )
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -34,7 +52,7 @@ export default function Index() {
                                 Descrição da Anotação
                             </Text>
                             <View style={styles.modalSectionFooter}>
-                            <TouchableOpacity style={styles.modalSectionButton}>
+                            <TouchableOpacity style={styles.modalSectionButton} onPress={confirmDelete}>
                                 <Text style={styles.modalSectionButtonText}>
                                     Excluir
                                 </Text>
