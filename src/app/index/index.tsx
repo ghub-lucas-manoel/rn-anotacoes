@@ -1,12 +1,14 @@
-import { Alert, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Alert, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import Card from '@/components/card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AnotacaoStorage, linkStorage } from '@/storage/anotacao-storage';
 
 export default function Index() {
     const [showModal, setShowModal] = useState(false);
+    const [notations, setNotations] = useState<AnotacaoStorage[]>([]);
 
     function confirmDelete() {
         Alert.alert("Excluir Anotação",
@@ -25,6 +27,17 @@ export default function Index() {
             ]
         )
     }
+
+    useEffect(() => {
+        
+        async function getNotations() {
+            const resp = await linkStorage.get();
+            setNotations(resp);
+        }
+
+        getNotations().catch(console.error);
+    })
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -33,9 +46,14 @@ export default function Index() {
                     <MaterialIcons name='add' size={40}/>
                 </TouchableOpacity> 
             </View>
-            <View style={styles.main}>
-                <Card onPress={() => setShowModal(true)}/>
-            </View>
+            <FlatList 
+                data={notations}
+                keyExtractor={item => item.id}
+                renderItem={({item}) => (
+                    <Card title={item.title} descriprion={item.description} onPress={() => setShowModal(true)} />
+                )}
+                contentContainerStyle={styles.main}
+            />
             <Modal transparent visible={showModal} animationType='slide'>
                 <View style={styles.modal}>
                     <View style={styles.modalContainer}>

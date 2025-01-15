@@ -21,8 +21,6 @@ export default function Add() {
                 description
             });
 
-            console.log(await linkStorage.get());
-
             Alert.alert(
                 'Nova Anotação',
                 'Anotação adicionada com sucesso.',
@@ -51,7 +49,7 @@ export default function Add() {
             </View>
             <View style={styles.main}>
                 <TextInput style={styles.input} placeholder="Título da Anotação" onChangeText={setTitle} />
-                <TextInput style={styles.input} placeholder="Descrição da Anotação" />
+                <TextInput style={styles.input} placeholder="Descrição da Anotação" onChangeText={setDescription}/>
                 <TouchableOpacity style={styles.addButton} onPress={add}>
                     <Text style={styles.addButtonText}>Adicionar</Text>
                 </TouchableOpacity>
