@@ -22,6 +22,14 @@ export default function Index() {
                 {
                     text: 'Sim',
                     onPress: () => {
+
+                        async function removeNotaton(id:string) {
+                            await linkStorage.remove(notation.id);    
+                        }
+                        
+                        removeNotaton(notation.id).catch(console.error);
+                        Alert.alert("Remover Anotação", "Anotação excluída com sucesso.");
+                        setShowModal(false);
                         return;
                     }
                 }
