@@ -9,6 +9,7 @@ import { AnotacaoStorage, linkStorage } from '@/storage/anotacao-storage';
 export default function Index() {
     const [showModal, setShowModal] = useState(false);
     const [notations, setNotations] = useState<AnotacaoStorage[]>([]);
+    const [notation, setNotation] = useState<AnotacaoStorage>( {} as AnotacaoStorage);
 
     function confirmDelete() {
         Alert.alert("Excluir Anotação",
@@ -50,7 +51,10 @@ export default function Index() {
                 data={notations}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => (
-                    <Card title={item.title} descriprion={item.description} onPress={() => setShowModal(true)} />
+                    <Card title={item.title} descriprion={item.description} onPress={() => {
+                        setNotation(item);
+                        setShowModal(true);
+                    }} />
                 )}
                 contentContainerStyle={styles.main}
             />
@@ -59,7 +63,7 @@ export default function Index() {
                     <View style={styles.modalContainer}>
                         <View style={styles.modalHeader}>
                             <Text style={styles.modalHeaderTitle}>
-                                Título da Anotação
+                                {notation.title}
                             </Text>
                             <TouchableOpacity onPress={() => setShowModal(false)}>
                                 <MaterialIcons name='exit-to-app' size={25}/>
@@ -67,7 +71,7 @@ export default function Index() {
                         </View>
                         <View style={styles.modalSection}>
                             <Text style={styles.modalSectionDescription}>
-                                Descrição da Anotação
+                                {notation.description}
                             </Text>
                             <View style={styles.modalSectionFooter}>
                             <TouchableOpacity style={styles.modalSectionButton} onPress={confirmDelete}>
