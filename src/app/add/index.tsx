@@ -49,7 +49,7 @@ export default function Add() {
             </View>
             <View style={styles.main}>
                 <TextInput style={styles.input} placeholder="Título da Anotação" onChangeText={setTitle} />
-                <TextInput style={styles.input} placeholder="Descrição da Anotação" onChangeText={setDescription}/>
+                <TextInput style={styles.input} placeholder="Descrição da Anotação" onChangeText={setDescription} multiline={true}/>
                 <TouchableOpacity style={styles.addButton} onPress={add}>
                     <Text style={styles.addButtonText}>Adicionar</Text>
                 </TouchableOpacity>

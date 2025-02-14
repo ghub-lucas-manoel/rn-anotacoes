@@ -1,4 +1,4 @@
-import { FlatList, Alert, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Alert, Image, Modal, Text, TouchableOpacity, View, ScrollView, Dimensions } from 'react-native';
 import { styles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -9,7 +9,9 @@ import { AnotacaoStorage, linkStorage } from '@/storage/anotacao-storage';
 export default function Index() {
     const [showModal, setShowModal] = useState(false);
     const [notations, setNotations] = useState<AnotacaoStorage[]>([]);
-    const [notation, setNotation] = useState<AnotacaoStorage>( {} as AnotacaoStorage);
+    const [notation, setNotation] = useState<AnotacaoStorage>({} as AnotacaoStorage);
+    const [contentHeight, setContentHeight] = useState(0);
+    const maxModalHeight = Dimensions.get('window').height;
 
     function confirmDelete() {
         Alert.alert("Excluir Anotação",
@@ -23,10 +25,10 @@ export default function Index() {
                     text: 'Sim',
                     onPress: () => {
 
-                        async function removeNotaton(id:string) {
-                            await linkStorage.remove(notation.id);    
+                        async function removeNotaton(id: string) {
+                            await linkStorage.remove(notation.id);
                         }
-                        
+
                         removeNotaton(notation.id).catch(console.error);
                         Alert.alert("Remover Anotação", "Anotação excluída com sucesso.");
                         setShowModal(false);
@@ -38,7 +40,7 @@ export default function Index() {
     }
 
     useEffect(() => {
-        
+
         async function getNotations() {
             const resp = await linkStorage.get();
             setNotations(resp);
@@ -50,15 +52,15 @@ export default function Index() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Image source={require('@/assets/logo.png')} style={styles.logo}/>
+                <Image source={require('@/assets/logo.png')} style={styles.logo} />
                 <TouchableOpacity onPress={() => router.navigate('/add')}>
-                    <MaterialIcons name='add' size={40}/>
-                </TouchableOpacity> 
+                    <MaterialIcons name='add' size={40} />
+                </TouchableOpacity>
             </View>
-            <FlatList 
+            <FlatList
                 data={notations}
                 keyExtractor={item => item.id}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                     <Card title={item.title} descriprion={item.description} onPress={() => {
                         setNotation(item);
                         setShowModal(true);
@@ -66,31 +68,32 @@ export default function Index() {
                 )}
                 contentContainerStyle={styles.main}
             />
-            <Modal transparent visible={showModal} animationType='slide'>
-                <View style={styles.modal}>
-                    <View style={styles.modalContainer}>
-                        <View style={styles.modalHeader}>
-                            <Text style={styles.modalHeaderTitle}>
-                                {notation.title}
+            <Modal transparent visible={showModal} animationType='slide' style={styles.modal}>
+                <View style={[styles.modalContainer]}>
+                    <View style={styles.modalHeader}>
+                        <Text style={styles.modalHeaderTitle}>
+                            {notation.title}
+                        </Text>
+                        <TouchableOpacity onPress={() => setShowModal(false)}>
+                            <MaterialIcons name='exit-to-app' size={25} />
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView
+                        style={styles.modalSection}
+                        onLayout={(event) => 
+                            setContentHeight(event.nativeEvent.layout.height)
+                        }>
+                        <Text style={styles.modalSectionDescription}>
+                            {notation.description}
+                        </Text>
+                    </ScrollView>
+                    <View style={styles.modalSectionFooter}>
+                        <TouchableOpacity style={styles.modalSectionButton} onPress={confirmDelete}>
+                            <Text style={styles.modalSectionButtonText}>
+                                Excluir
                             </Text>
-                            <TouchableOpacity onPress={() => setShowModal(false)}>
-                                <MaterialIcons name='exit-to-app' size={25}/>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.modalSection}>
-                            <Text style={styles.modalSectionDescription}>
-                                {notation.description}
-                            </Text>
-                            <View style={styles.modalSectionFooter}>
-                            <TouchableOpacity style={styles.modalSectionButton} onPress={confirmDelete}>
-                                <Text style={styles.modalSectionButtonText}>
-                                    Excluir
-                                </Text>
-                                <MaterialIcons name='delete' size={25}/>
-                            </TouchableOpacity>
-
-                            </View>
-                        </View>
+                            <MaterialIcons name='delete' size={25} />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>

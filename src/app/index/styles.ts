@@ -23,13 +23,17 @@ export const styles = StyleSheet.create({
     },
     modal: {
         flex: 1,
-        justifyContent: 'flex-end'
+        backgroundColor: "rgba(0,0,0,0.5)",
+        justifyContent: "flex-end"
     },
     modalContainer: {
         backgroundColor: colors.orange[200],
         padding: 10,
         borderTopStartRadius: 10,
-        borderTopEndRadius: 10
+        borderTopEndRadius: 10,
+        bottom: 0,
+        position: "absolute",
+        maxHeight: '100%'
     },
     modalHeader: {
         justifyContent: 'space-between',
@@ -42,6 +46,10 @@ export const styles = StyleSheet.create({
         paddingBottom: 10
     },
     modalSection: {
+        maxHeight: '100%'
+    },
+    scrollContent: {
+        padding: 20,
     },
     modalSectionDescription: {
         fontSize: 20
