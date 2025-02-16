@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.orange[500],
         alignItems: 'center',
-        padding: 10
+        height: 60,
+        paddingHorizontal: 10
     },
     icon: {
         color: colors.yellow[50]

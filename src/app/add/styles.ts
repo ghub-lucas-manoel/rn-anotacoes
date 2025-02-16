@@ -9,13 +9,18 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: colors.orange[200],
+        backgroundColor: colors.orange[500],
         alignItems: 'center',
-        padding: 10
+        paddingHorizontal: 10,
+        height: 60
     },
     headerTitle: {
-        fontSize: 20,
-        fontWeight: '500'
+        fontSize: 22,
+        fontWeight: '500',
+        color: colors.yellow[50]
+    },
+    icon: {
+        color: colors.yellow[50]
     },
     main: {
         padding: 10,
@@ -28,7 +33,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.orange[200]
     },
     addButton: {
-        backgroundColor: colors.orange[900],
+        backgroundColor: colors.orange[500],
         borderRadius: 10,
         width: '100%',
         justifyContent: 'center',
@@ -36,6 +41,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 5
     },
     addButtonText: {
-        fontSize: 20
+        fontSize: 20,
+        color: colors.yellow[50]
     }
 })

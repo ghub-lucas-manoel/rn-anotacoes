@@ -43,7 +43,7 @@ export default function Add() {
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => router.back()}>
-                    <MaterialIcons name="arrow-back" size={20} />
+                    <MaterialIcons name="arrow-back" size={30} style={styles.icon}/>
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Nova Anotação</Text>
             </View>

@@ -54,7 +54,7 @@ export default function Index() {
             <View style={styles.header}>
                 <Image source={require('@/assets/logo.png')} style={styles.logo} />
                 <TouchableOpacity onPress={() => router.navigate('/add')}>
-                    <MaterialIcons name='add' size={40} style={styles.icon}/>
+                    <MaterialIcons name='add' size={30} style={styles.icon}/>
                 </TouchableOpacity>
             </View>
             <FlatList
