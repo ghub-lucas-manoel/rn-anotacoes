@@ -15,7 +15,7 @@ export default function Card({title, descriprion, ...rest}: CardProps) {
                     {title}
                 </Text>
                 <TouchableOpacity {...rest}>
-                    <MaterialIcons name='more-vert' size={23} />
+                    <MaterialIcons name='more-vert' size={23} style={styles.menu}/>
                 </TouchableOpacity>
             </View>
             <Text style={styles.cardDescription}>

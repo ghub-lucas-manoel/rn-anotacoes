@@ -54,7 +54,7 @@ export default function Index() {
             <View style={styles.header}>
                 <Image source={require('@/assets/logo.png')} style={styles.logo} />
                 <TouchableOpacity onPress={() => router.navigate('/add')}>
-                    <MaterialIcons name='add' size={40} />
+                    <MaterialIcons name='add' size={40} style={styles.icon}/>
                 </TouchableOpacity>
             </View>
             <FlatList
@@ -75,7 +75,7 @@ export default function Index() {
                             {notation.title}
                         </Text>
                         <TouchableOpacity onPress={() => setShowModal(false)}>
-                            <MaterialIcons name='exit-to-app' size={25} />
+                            <MaterialIcons name='exit-to-app' size={25} style={styles.icon} />
                         </TouchableOpacity>
                     </View>
                     <ScrollView
@@ -92,7 +92,7 @@ export default function Index() {
                             <Text style={styles.modalSectionButtonText}>
                                 Excluir
                             </Text>
-                            <MaterialIcons name='delete' size={25} />
+                            <MaterialIcons name='delete' size={25} style={styles.icon}/>
                         </TouchableOpacity>
                     </View>
                 </View>
