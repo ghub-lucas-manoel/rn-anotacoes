@@ -1,16 +1,15 @@
 import { FlatList, Alert, Image, Modal, Text, TouchableOpacity, View, ScrollView, Dimensions } from 'react-native';
 import { styles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import Card from '@/components/card';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnotacaoStorage, linkStorage } from '@/storage/anotacao-storage';
 
 export default function Index() {
     const [showModal, setShowModal] = useState(false);
     const [notations, setNotations] = useState<AnotacaoStorage[]>([]);
     const [notation, setNotation] = useState<AnotacaoStorage>({} as AnotacaoStorage);
-    const [contentHeight, setContentHeight] = useState(0);
     const maxModalHeight = Dimensions.get('window').height;
 
     function confirmDelete() {
@@ -31,6 +30,8 @@ export default function Index() {
 
                         removeNotaton(notation.id).catch(console.error);
                         Alert.alert("Remover Anotação", "Anotação excluída com sucesso.");
+                        
+                        getNotations().catch(console.error);
                         setShowModal(false);
                         return;
                     }
@@ -39,15 +40,14 @@ export default function Index() {
         )
     }
 
+    async function getNotations() {
+        const resp = await linkStorage.get();
+        setNotations(resp);
+    }
+
     useEffect(() => {
-
-        async function getNotations() {
-            const resp = await linkStorage.get();
-            setNotations(resp);
-        }
-
         getNotations().catch(console.error);
-    })
+    }, [notations])
 
     return (
         <View style={styles.container}>
@@ -79,10 +79,7 @@ export default function Index() {
                         </TouchableOpacity>
                     </View>
                     <ScrollView
-                        style={styles.modalSection}
-                        onLayout={(event) => 
-                            setContentHeight(event.nativeEvent.layout.height)
-                        }>
+                        style={styles.modalSection}>
                         <Text style={styles.modalSectionDescription}>
                             {notation.description}
                         </Text>
