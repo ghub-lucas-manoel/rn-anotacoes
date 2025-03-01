@@ -2,7 +2,7 @@
 
 O Note.me é um aplicativo mobile onde você pode fazer anotações importantes sobre o seu cotidiano: lembretes sobre o trabalho, da casa ou suas metas pessoais. Deixe sua mente cuidar do que realmente importa, e o resto o Note.me guarda para você.
 
-O aplicativo foi desenvolvido em React Native com expo. O objetivo do desenvolvimento desta aplicação foi puramente educacional, visando entender os fundamentos do RN. Todos os conceitos implementados nessa aplicação foram aprendidos através do curso de React Native da Rocketseat, ministrado pelo Rogrigo Gongalves.
+O aplicativo foi desenvolvido em React Native com expo. O objetivo do desenvolvimento desta aplicação foi puramente educacional, visando entender os fundamentos do RN. Todos os conceitos implementados nessa aplicação foram aprendidos através do curso de React Native da Rocketseat, ministrado pelo Rodrigo Gongalves.
 
 # Layout da Aplicação
 
